@@ -7,21 +7,28 @@
     <title>Videojs</title>
     <link rel="stylesheet" href="./js/video-js.css">
     <script src="./js/video.js"></script>
+    <script src="./js/videojs-flash.js"></script>
     <script src="./js/videojs-contrib-hls.js"></script>
 </head>
 <body>
 <section id="videoPlayer">
-    <video id="example-video" width="600" height="300" class="video-js vjs-default-skin vjs-big-play-centered" poster="">
-        <source
-                src="http://live.incarcloud.com/easmp/test-2_lld.m3u8"
-                type="application/x-mpegURL" id="target">
+    <video id="example-video" width="600" height="300" class="video-js vjs-default-skin vjs-big-play-centered" poster="" src="rtmp://live.incarcloud.com/easmp/test-2">
+        <!--<source src="http://live.incarcloud.com/easmp/test-2_lld.m3u8" type="application/x-mpegURL" id="target">-->
+        <source src="rtmp://live.incarcloud.com/easmp/test-2" type="rtmp/mp4" id="target1">
     </video>
 </section>
 </body>
 <script type="text/javascript">
   var player = videojs(
     'example-video',
-    {"poster": "","controls": "true"},
+    {
+      poster: "",
+      controls: true,
+      techOrder: ['flash'],
+      flash: {
+        swf: './js/video-js.swf'
+      },
+    },
     function(){
       this.on('play',function(){
         console.log('正在播放');
